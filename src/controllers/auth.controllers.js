@@ -164,10 +164,10 @@ const login = asyncHandler(async (req, res) => {
   );
   //CONSTRAIN for the client to store token
   const options = {
-  httpOnly: true,
-  secure: false,     // must be false for localhost
-  sameSite: "lax"
-};
+    httpOnly: true,
+    secure: true,
+    sameSite: "None",
+  };
 
 
   return res
@@ -250,10 +250,13 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
     }
     console.log("valid refreshtToken");
     
+    //CONSTRAIN for the client to store token
     const options = {
       httpOnly: true,
-      secure: true
+      secure: true,
+      sameSite: "None",
     };
+
     //generate new access ,refresh token,
     console.log("Generating new access & refresh Token");
     
