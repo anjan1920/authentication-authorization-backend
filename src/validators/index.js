@@ -4,8 +4,6 @@
 import { body } from "express-validator";
 
 
-import { AvailableUserRole } from "../utils/constants.js";
-
 
 const userRegisterValidator = () => {
   //return the response err or not err to next module -userRegisterValidator() 
