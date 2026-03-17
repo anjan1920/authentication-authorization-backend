@@ -51,7 +51,7 @@ const registerUser = asyncHandler(async (req, res) => {
       subject: "Please verify your email",
       mailgenContent: emailVerificationMailgenContent(
         user.username,
-        `http://127.0.0.1:5500/frontend/pages/email-verify.html?token=${unHashedToken}`
+        `http://127.0.0.1:5500/auth-system-frontend/pages/email-verify.html?token=${unHashedToken}`
       ),
     });
   } catch (error) {
@@ -169,7 +169,8 @@ const login = asyncHandler(async (req, res) => {
         subject: "Please verify your email",
         mailgenContent: emailVerificationMailgenContent(
           user.username,
-          `http://127.0.0.1:5500/frontend/pages/email-verify.html?token=${unHashedToken}`
+          `http://127.0.0.1:5500/auth-system-frontend/pages/email-verify.html?token=${unHashedToken}`
+          
         ),
       });
 
