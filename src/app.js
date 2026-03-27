@@ -30,7 +30,7 @@ app.use(
 //import the routes
 import  adminRouter from "./routes/admin.routes.js"
 import authRouter from "./routes/auth.routes.js";
-// import projectRouter from "./routes/project.routes.js";
+
 
 //admin route
 app.use("/api/v1/admin",adminRouter);
@@ -38,7 +38,7 @@ app.use("/api/v1/admin",adminRouter);
 
 //normal user route
 app.use("/api/v1/auth", authRouter);
-//app.use("/api/v1/projects", projectRouter);
+
 
 app.get("/", (req, res) => {
   console.log("Home page hit..");
