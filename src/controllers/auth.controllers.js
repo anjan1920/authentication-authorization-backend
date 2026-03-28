@@ -52,7 +52,7 @@ const registerUser = asyncHandler(async (req, res) => {
       subject: "Please verify your email",
       mailgenContent: emailVerificationMailgenContent(
         user.username,
-        `http://127.0.0.1:5500/pages/email-verify.html?token=${unHashedToken}`
+        `${process.env.FRONTEND_URL}/pages/email-verify.html?token=${unHashedToken}`
       ),
     });
   } catch (error) {
@@ -171,7 +171,7 @@ const login = asyncHandler(async (req, res) => {
         subject: "Please verify your email",
         mailgenContent: emailVerificationMailgenContent(
           user.username,
-          `http://127.0.0.1:5500/pages/email-verify.html?token=${unHashedToken}`
+          `${process.env.FRONTEND_URL}/pages/email-verify.html?token=${unHashedToken}`
           
         ),
       });
@@ -420,9 +420,10 @@ const forgotPasswordRequest = asyncHandler(async (req, res) => {
       subject: "Password reset request",
       mailgenContent: forgotPasswordMailgenContent(
         user.username,
-        `http://127.0.0.1:5500/frontend/pages/reset-password.html?token=${unHashedToken}`//frontend on local host
+        `${process.env.FRONTEND_URL}/pages/reset-password.html?token=${unHashedToken}`//frontend on local host
       ),
     });
+   
   } catch (error) {
     console.error("Email sending failed:", error);
     throw new ApiError(500, "Something went wrong while sending email");
@@ -587,7 +588,8 @@ const resendEmailVerification = asyncHandler(async (req, res) => {
     subject: "Verify your email",
     mailgenContent: emailVerificationMailgenContent(
       user.username,
-      `http://127.0.0.1:5500/frontend/pages/email-verify.html?token=${unHashedToken}`
+      `${process.env.FRONTEND_URL}/pages/email-verify.html?token=${unHashedToken}`
+      
     ),
   });
 
