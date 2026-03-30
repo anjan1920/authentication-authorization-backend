@@ -33,22 +33,7 @@ import  adminRouter from "./routes/admin.routes.js"
 import authRouter from "./routes/auth.routes.js";
 
 
-//admin route
-app.use("/api/v1/admin",adminRouter);
-
-
-//normal user route
-app.use("/api/v1/auth", authRouter);
-
-
-app.get("/", (req, res) => {
-  console.log("Home page hit..");
-  
-  res.send("Welcome to Home");
-});
-
-
-//force server to remove cache
+//
 app.use((req, res, next) => {
   res.setHeader(
     "Cache-Control",
@@ -57,12 +42,23 @@ app.use((req, res, next) => {
   next();
 });
 
-//err
+//routes
+app.use("/api/v1/admin", adminRouter);
+app.use("/api/v1/auth", authRouter);
+
+//home page
+app.get("/", (req, res) => {
+  console.log("Home page hit..");
+  res.send("Welcome to Home");
+});
+
+// global err handle 
+
 app.use((err, req, res, next) => {
   res.status(err.statusCode || 500).json({
     success: false,
-    message: err.message,
-    errors: err.errors || []
+    ...(err.message && err.message !== "" && { message: err.message }),
+    ...(err.errors && { errors: err.errors }),
   });
 });
 
