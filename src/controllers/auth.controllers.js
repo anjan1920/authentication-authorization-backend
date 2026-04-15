@@ -515,6 +515,8 @@ const deleteCurrentUser = asyncHandler(async (req, res) => {
   const user_id = req.user?._id;
   const password = req.body.password;
 
+  
+
   //find user based on that id
   const user = await User.findById(user_id)
   if (!user) {
@@ -538,7 +540,6 @@ const deleteCurrentUser = asyncHandler(async (req, res) => {
   });
 
 });
-
 
 
 const resendEmailVerification = asyncHandler(async (req, res) => {

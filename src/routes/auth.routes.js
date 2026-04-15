@@ -27,6 +27,7 @@ import {
 } from "../validators/index.js";
 
 import { loginRateLimiter } from  "../middlewares/rateLimiter.middleware.js"
+import { blockProtectedUser } from "../middlewares/protectUser.js";
 
 
 const router = Router();
@@ -60,7 +61,7 @@ router.route("/login").post(
   },
   userLoginValidator(), // collect validation errors
   validate,             // send error response if invalid
-  loginRateLimiter,    
+  loginRateLimiter,    //limit login attempt
   login                 // controller
 );
 
@@ -92,6 +93,7 @@ router.route("/forgot-password").post(
   },
   userForgotPasswordValidator(),//collect input err
   validate,//handle err if any
+  blockProtectedUser,//stop change the password for test user & admin
   forgotPasswordRequest //logic
 );
 
@@ -103,6 +105,7 @@ router.route("/reset-password/:resetToken").post(
   },
   userResetForgotPasswordValidator(), ////just collect the err in new password input
   validate,//handle errs if any
+  blockProtectedUser,
   resetForgotPassword//logic
 
 );
@@ -115,6 +118,7 @@ router.route("/reset-password/:resetToken").post(
     verifyJWT,//verify access token
     userChangeCurrentPasswordValidator(),//collect input err
     validate,//handle input err if any
+    blockProtectedUser,
     changeCurrentPassword,
   );
 
@@ -138,8 +142,9 @@ router.route("/delete-me").delete(
   console.log("Incoming delete account request..");
   next();
 },
-verifyJWT,
-deleteCurrentUser
+  verifyJWT,
+  blockProtectedUser,
+  deleteCurrentUser
 );
 
 
