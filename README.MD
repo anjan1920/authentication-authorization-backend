@@ -1,8 +1,7 @@
 # 🚀 Authentication & Authorization Backend
 
-A production-style authentication system built using **Node.js, Express, MongoDB, JWT, and Redis**, with secure session handling and role-based access control.
-
-Deployed on Render and integrated with **Brevo API** for email services.
+A production-grade authentication & authorization system built with Node.js, Express, MongoDB, JWT, and Redis.
+Featuring secure session management, refresh token rotation, and role-based access control , deployed on Render with Brevo-powered email workflows.
 
 ---
 
